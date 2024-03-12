@@ -3,53 +3,89 @@ package com.example.myAssignment2
 import java.lang.Exception
 
 fun main() {
-    displayInfo()
+
+    val topokki = Topokki()
+    val fishcake = Fishcake()
+    val intestine = Intestine()
+    val fried = Fried()
+
+    println("당신은 배고픔에 이끌려 어느 분식집으로 들어왔습니다!")
     while (true) {
-        print("먹고 싶은 메뉴를 선택해주세요(가게를 나가고 싶으면 -1을 입력하세요) : ")
+        displayInfo()
+        print("원하시는 메뉴판 번호를 입력하세요 : ")
         try {
-            val option = readLine()!!.toInt()
-            val topokki = Topokki()
-            val fishcake = Fishcake()
-            val intestine = Intestine()
-            val fried = Fried()
-            when (option) {
+            val opt1 = readLine()!!.toInt()
+            when (opt1) {
                 1 -> {
                     topokki.display()
+                    while (true) {
+                        print("본 메뉴판으로 가실거면 0을 입력하세요 : ")
+                        try {
+                            val opt2 = readLine()!!.toInt()
+                            if(opt2==0) break
+                            else println("잘못된 숫자를 입력했습니다!")
+                        } catch (e: Exception) {
+                            println("null 값 또는 문자는 입력할 수 없습니다!")
+                        }
+                    }
                 }
 
                 2 -> {
                     fishcake.display()
+                    while (true) {
+                        print("본 메뉴판으로 가실거면 0을 입력하세요 : ")
+                        try {
+                            val opt2 = readLine()!!.toInt()
+                            if (opt2 ==0) break
+                            else println("잘못 입력하셨습니다!")
+                        } catch (e: Exception) {
+                            println("null 값 또는 문자는 입력할 수 없습니다!")
+                        }
+                    }
                 }
 
                 3 -> {
                     intestine.display()
+                    while (true) {
+                        print("본 메뉴판으로 가실거면 0을 입력하세요 : ")
+                        try {
+                            val opt2 = readLine()!!.toInt()
+                            if (opt2 ==0) break
+                            else println("잘못 입력하셨습니다!")
+                        } catch (e: Exception) {
+                            println("null 값 또는 문자는 입력할 수 없습니다!")
+                        }
+                    }
                 }
 
                 4 -> {
                     fried.display()
+                    while (true) {
+                        print("본 메뉴판으로 가실거면 0을 입력하세요 : ")
+                        try {
+                            val opt2 = readLine()!!.toInt()
+                            if (opt2 ==0) break
+                            else println("잘못 입력하셨습니다!")
+                        } catch (e: Exception) {
+                            println("null 값 또는 문자는 입력할 수 없습니다!")
+                        }
+                    }
                 }
 
-                -1 -> {
-                    println("가게를 떠납니다...")
+                0 -> {
+                    println("결국 분식집을 나갑니다 ...")
                     break
                 }
 
                 else -> {
-                    println("잘못된 번호를 입력하셨습니다!")
+                    println("0,1,2,3,4 에 해당하는 숫자를 입력하세요!")
                 }
             }
         } catch (e: Exception) {
-            println("숫자를 입력해주세요!")
+            println("null 값 또는 문자는 입력할 수 없습니다!")
         }
     }
-//    when(Food) {
-//        is Topokki -> {}
-//        is Fishcake -> {}
-//        is Intestine -> {}
-//        is Fried -> {}
-//    }
 }
-
 
 fun displayInfo() {
     println("========== 안오면 쫓아간다 분식집 메뉴판 ==========")
@@ -57,5 +93,6 @@ fun displayInfo() {
     println("=          2. 끝내주게 맛있는 어묵              =")
     println("=          3. 맛깔나게 잘익은 순대              =")
     println("=          4. 오질나게 잘튀긴 튀김              =")
+    println("=      0. 메뉴가 맘에 안들면 분식집 나가~!        =")
     println("==============================================")
 }
