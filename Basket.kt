@@ -20,10 +20,10 @@ class Basket private constructor() {
     }
 
     fun displayBasket() {
-        println("장바구니에 들어있는 음식 : ${basket}")
+        println("장바구니 : ${basket}")
     }
 
     fun printMoney() {
-        println("지금까지 지불해야 하는 금액 : ${requireMoney}")
+        println("지불금액 : ${requireMoney}")
     }
 }

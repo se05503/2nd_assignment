@@ -6,7 +6,7 @@ class Topokki : Food() {
     val menu2: Int = 3500
     val menu3: Int = 3000
     val menu4: Int = 500
-    var singletonBasket = Basket.getInstance()
+    var singletonBasket = Basket.getInstance() // 공유 객체
 
     override fun display() {
         println("========== 죽여주게 매운 떡볶이 메뉴판 ==========")
@@ -54,10 +54,6 @@ class Topokki : Food() {
                     displayBasket()
                     printMoney()
                 }
-            }
-
-            0 -> {
-                println("본래 메뉴판으로 돌아갑니다!")
             }
         }
     }
