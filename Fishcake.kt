@@ -18,14 +18,14 @@ class Fishcake: Food() {
         println("==============================================")
     }
 
-    fun fishcakeFood(num: Int) {
+    fun fishcakeFood(num: Int?) {
         when (num) {
             1 -> {
                 singletonBasket.run {
                     basket.add("매운 어묵")
                     requireMoney += menu1
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -34,7 +34,7 @@ class Fishcake: Food() {
                     basket.add("순한 어묵")
                     requireMoney += menu2
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -43,7 +43,7 @@ class Fishcake: Food() {
                     basket.add("카레 어묵")
                     requireMoney += menu3
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -52,7 +52,7 @@ class Fishcake: Food() {
                     basket.add("치즈 어묵")
                     requireMoney += menu4
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 

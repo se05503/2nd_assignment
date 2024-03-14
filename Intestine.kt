@@ -8,6 +8,8 @@ class Intestine : Food() {
     val menu4: Int = 7000
     var singletonBasket = Basket.getInstance()
 
+
+
     override fun display() {
         println("========== 맛깔나게 잘익은 순대 메뉴판 ==========")
         println("=         1. 매운 순대 - 4000냥               =")
@@ -18,14 +20,14 @@ class Intestine : Food() {
         println("==============================================")
     }
 
-    fun intestineFood(num: Int) {
+    fun intestineFood(num: Int?) {
         when (num) {
             1 -> {
                 singletonBasket.run {
                     basket.add("매운 순대")
                     requireMoney += menu1
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -34,7 +36,7 @@ class Intestine : Food() {
                     basket.add("곱창 순대")
                     requireMoney += menu2
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -43,7 +45,7 @@ class Intestine : Food() {
                     basket.add("고기 순대")
                     requireMoney += menu3
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -52,7 +54,7 @@ class Intestine : Food() {
                     basket.add("아바이 순대")
                     requireMoney += menu4
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 

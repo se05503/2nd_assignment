@@ -21,14 +21,14 @@ class Fried : Food() {
         println("==============================================")
     }
 
-    fun friedFood(num: Int) {
+    fun friedFood(num: Int?) {
         when (num) {
             1 -> {
                 singletonBasket.run {
                     basket.add("오징어 튀김")
                     requireMoney += menu1
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -37,7 +37,7 @@ class Fried : Food() {
                     basket.add("가지 튀김")
                     requireMoney += menu2
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -46,7 +46,7 @@ class Fried : Food() {
                     basket.add("신발 튀김")
                     requireMoney += menu3
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 
@@ -55,7 +55,7 @@ class Fried : Food() {
                     basket.add("새우 튀김")
                     requireMoney += menu4
                     displayBasket()
-                    printMoney()
+                    Payment.printMoney()
                 }
             }
 

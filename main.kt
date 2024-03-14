@@ -1,60 +1,70 @@
 package com.example.myAssignment2
 
-import java.lang.Exception
+// lv4 의 목적 구현
+// 예외 처리 (!! 안쓰고 구현) → 일단 예외 처리는 되는데 완전히 숙달되지 않아서 피드백 부탁드리기...
+// 상속 관계 더욱 명확하게 만들기 (인터페이스 등 추가)
+// 현재 잔액과 물건의 가격 비교해보는 클래스 메소드 추가하기
+// 물건을 빼는 메소드 추가해보기
 
-/*
-1. lv2 → lv3 변화된 점 : Basket 클래스, Payment 클래스 추가
-2. Singleton 개념 적용 : Basket 클래스의 객체를 공유 객체로 만듬
-3. Basket 클래스에서 콜렉션 개념 사용
-*/
 fun main() {
 
-    val toppoki=Topokki()
-    val fishcake=Fishcake()
-    val intestine=Intestine()
-    val fried=Fried()
-    val payment=Payment()
+    val toppoki = Topokki()
+    val fishcake = Fishcake()
+    val intestine = Intestine()
+    val fried = Fried()
 
-    var objectList = ArrayList<Food>()
+//    val payment = Payment()
+
+    var objectList = ArrayList<Food>() //lv3 : 메뉴들(Food 부모 클래스의 자식들)을 객체화하고 리스트에 담아둔다.
     objectList.add(toppoki)
     objectList.add(fishcake)
     objectList.add(intestine)
     objectList.add(fried)
 
     println("당신은 배고픔에 이끌려 어느 분식집으로 들어왔습니다!")
-    payment.inputMoneyInfo()
+    Payment.inputMoneyInfo()
 
     while (true) {
         displayInfo()
         print("원하시는 메뉴판 번호를 입력하세요 : ")
-        val option = readLine()!!.toInt()
-        when (option) {
-            1 -> {
-                foodSelect(objectList[0])
-            }
+        try {
+            var option: String? = readlnOrNull()
+//          val option : Int? = readlnOrNull()?.toInt()
+//          option?.toInt() ?: print("공백은 허용되지 않습니다!")
+            when (option?.toInt()) {
+                1 -> {
+                    foodSelect(objectList[0])
+                }
 
-            2 -> {
-                foodSelect(objectList[1])
-            }
+                2 -> {
+                    foodSelect(objectList[1])
+                }
 
-            3 -> {
-                foodSelect(objectList[2])
-            }
+                3 -> {
+                    foodSelect(objectList[2])
+                }
 
-            4 -> {
-                foodSelect(objectList[3])
-            }
+                4 -> {
+                    foodSelect(objectList[3])
+                }
 
-            0 -> {
-                println("가게를 나갑니다..")
-                break
-            }
+                0 -> {
+                    println("가게를 나갑니다..")
+                    break
+                }
 
-            -1 -> {
-                payment.run {
-                    displayInfo()
+                -1 -> {
+                    Payment.run {
+                        displayInfo()
+                    }
+                }
+
+                else -> {
+                    println("잘못된 숫자를 입력했습니다!")
                 }
             }
+        } catch (e: Exception) {
+            println("문자는 허용되지 않습니다!")
         }
     }
 }
@@ -71,16 +81,32 @@ fun displayInfo() {
 }
 
 fun foodSelect(myFood: Food) {
-    when (myFood) {
+    when (myFood) { // 업캐스팅개념
         is Topokki -> {
-            myFood.run {
+            myFood.run { // scope function 중 run 함수 활용
                 display()
                 while (true) {
                     print("먹고 싶은 번호의 숫자를 고르시고, 본 메뉴판으로 돌아가려면 0을 입력하세요: ")
-                    var option = readLine()!!.toInt()
-                    if (option == 0) break
-                    else {
-                        topokkiFood(option)
+                    try {
+                        var option: Int? = readLine()?.toInt() // 이것도 맞아..?
+//                        option ?: "공백은 입력할 수 없습니다!"  → 이거 맞아..?
+                        require(option in 0..4) // 예외 처리 이거 맞나..?
+                        if (option == 0) break
+                        else {
+                            topokkiFood(option)
+                            while (true) {
+                                print("장바구니에서 뺄 음식 이름 : ")
+                                val foodName: String? = readLine()
+                                if(foodName=="없음") break
+                                val foodPrice = myFood.foodMap[foodName]
+                                val basket = Basket.getInstance()
+                                if (foodPrice != null) {
+                                    basket.deleteFood(foodName, foodPrice)
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        println("다시 입력해주세요!")
                     }
                 }
             }
@@ -93,10 +119,27 @@ fun foodSelect(myFood: Food) {
                 display()
                 while (true) {
                     print("먹고 싶은 번호의 숫자를 고르시고, 본 메뉴판으로 돌아가려면 0을 입력하세요: ")
-                    var option = readLine()!!.toInt()
-                    if (option == 0) break
-                    else {
-                        fishcakeFood(option)
+                    try {
+                        var option = readLine()?.toInt()
+                        option ?: "공백 입력 안됩니다!"
+                        if (option in 0..4) {
+                            if (option == 0) break
+                            else {
+                                fishcakeFood(option)
+                                while (true) {
+                                    print("장바구니에서 뺄 음식 이름 : ")
+                                    val foodName: String? = readLine()
+                                    if(foodName=="없음") break
+                                    val foodPrice = myFood.foodMap[foodName]
+                                    val basket = Basket.getInstance()
+                                    if (foodPrice != null) {
+                                        basket.deleteFood(foodName, foodPrice)
+                                    }
+                                }
+                            }
+                        } else throw IllegalArgumentException("0부터 4사이까지 입력하세요!")
+                    } catch (e: Exception) {
+                        println("문자는 입력할 수 없습니다!")
                     }
                 }
             }
@@ -107,10 +150,25 @@ fun foodSelect(myFood: Food) {
                 display()
                 while (true) {
                     print("먹고 싶은 번호의 숫자를 고르시고, 본 메뉴판으로 돌아가려면 0을 입력하세요: ")
-                    var option = readLine()!!.toInt()
-                    if (option == 0) break
-                    else {
-                        intestineFood(option)
+                    try {
+                        var option = readLine()?.toInt()
+                        require(option in 0..4) { "0부터 4사이의 번호를 입력하세요!" }
+                        if (option == 0) break
+                        else {
+                            intestineFood(option)
+                            while (true) {
+                                print("장바구니에서 뺄 음식 이름 : ")
+                                val foodName: String? = readLine()
+                                if(foodName=="없음") break
+                                val foodPrice = myFood.foodMap[foodName]
+                                val basket = Basket.getInstance()
+                                if (foodPrice != null) {
+                                    basket.deleteFood(foodName, foodPrice)
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        println("잘못 입력했습니다!")
                     }
                 }
             }
@@ -121,10 +179,22 @@ fun foodSelect(myFood: Food) {
                 display()
                 while (true) {
                     print("먹고 싶은 번호의 숫자를 고르시고, 본 메뉴판으로 돌아가려면 0을 입력하세요: ")
-                    var option = readLine()!!.toInt()
-                    if (option == 0) break
-                    else {
-                        friedFood(option)
+                    try {
+                        var option = readLine()?.toInt()
+                        require(option in 0..4) { "0부터 4사이의 범위여야 합니다!" }
+                        if (option == 0) break
+                        else {
+                            friedFood(option)
+                            print("장바구니에서 뺄 음식 이름 : ")
+                            val foodName: String? = readLine()
+                            val foodPrice = myFood.foodMap[foodName]
+                            val basket = Basket.getInstance()
+                            if (foodPrice != null) {
+                                basket.deleteFood(foodName, foodPrice)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        println("잘못 입력했습니다!")
                     }
                 }
             }
