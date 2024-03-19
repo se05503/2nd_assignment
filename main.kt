@@ -13,9 +13,8 @@ fun main() {
     val intestine = Intestine()
     val fried = Fried()
 
-//    val payment = Payment()
 
-    var objectList = ArrayList<Food>() //lv3 : 메뉴들(Food 부모 클래스의 자식들)을 객체화하고 리스트에 담아둔다.
+    var objectList = ArrayList<Food>()
     objectList.add(toppoki)
     objectList.add(fishcake)
     objectList.add(intestine)
@@ -24,14 +23,18 @@ fun main() {
     println("당신은 배고픔에 이끌려 어느 분식집으로 들어왔습니다!")
     Payment.inputMoneyInfo()
 
+    /*
+    val option: Int = (readlnOrNull() ?: "0").toInt()
+    val option = readln().toInt()
+    */
+
     while (true) {
         displayInfo()
         print("원하시는 메뉴판 번호를 입력하세요 : ")
         try {
-            var option: String? = readlnOrNull()
+//          var option: String? = readlnOrNull()
 //          val option : Int? = readlnOrNull()?.toInt()
-//          option?.toInt() ?: print("공백은 허용되지 않습니다!")
-            when (option?.toInt()) {
+            when ((readlnOrNull() ?: "-5").toInt()) {
                 1 -> {
                     foodSelect(objectList[0])
                 }
@@ -99,7 +102,7 @@ fun foodSelect(myFood: Food) {
                                 val foodName: String? = readLine()
                                 if(foodName=="없음") break
                                 val foodPrice = myFood.foodMap[foodName]
-                                val basket = Basket.getInstance()
+                                val basket = Basket
                                 if (foodPrice != null) {
                                     basket.deleteFood(foodName, foodPrice)
                                 }
@@ -131,7 +134,7 @@ fun foodSelect(myFood: Food) {
                                     val foodName: String? = readLine()
                                     if(foodName=="없음") break
                                     val foodPrice = myFood.foodMap[foodName]
-                                    val basket = Basket.getInstance()
+                                    val basket = Basket
                                     if (foodPrice != null) {
                                         basket.deleteFood(foodName, foodPrice)
                                     }
@@ -161,7 +164,7 @@ fun foodSelect(myFood: Food) {
                                 val foodName: String? = readLine()
                                 if(foodName=="없음") break
                                 val foodPrice = myFood.foodMap[foodName]
-                                val basket = Basket.getInstance()
+                                val basket = Basket
                                 if (foodPrice != null) {
                                     basket.deleteFood(foodName, foodPrice)
                                 }
@@ -188,7 +191,7 @@ fun foodSelect(myFood: Food) {
                             print("장바구니에서 뺄 음식 이름 : ")
                             val foodName: String? = readLine()
                             val foodPrice = myFood.foodMap[foodName]
-                            val basket = Basket.getInstance()
+                            val basket = Basket
                             if (foodPrice != null) {
                                 basket.deleteFood(foodName, foodPrice)
                             }

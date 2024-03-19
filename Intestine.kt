@@ -1,8 +1,10 @@
 package com.example.myAssignment2
 
-class Intestine : Food() {
+abstract class Intestine : Food {
 
-    val menu1: Int = 4000
+    abstract override val name:String
+    abstract override val price:Int
+
     val menu2: Int = 6000
     val menu3: Int = 5000
     val menu4: Int = 7000
@@ -13,10 +15,8 @@ class Intestine : Food() {
     override fun display() {
         println("========== 맛깔나게 잘익은 순대 메뉴판 ==========")
         println("=         1. 매운 순대 - 4000냥               =")
-        println("=         2. 곱창 순대 - 6000냥               =")
-        println("=         3. 고기 순대 - 5000냥               =")
-        println("=         4. 아바이 순대 - 7000냥              =")
-        println("=         0. 다시 본 메뉴판으로 돌아가기          =")
+        println("=         2. 고기 순대 - 6000냥               =")
+        println("=         3. 다시 본 메뉴판으로 돌아가기          =")
         println("==============================================")
     }
 

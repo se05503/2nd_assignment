@@ -1,19 +1,16 @@
 package com.example.myAssignment2
 
-class Fishcake: Food() {
+abstract class Fishcake: Food {
 
-    val menu1: Int = 700
-    val menu2: Int = 500
-    val menu3: Int = 1000
-    val menu4: Int = 1000
-    var singletonBasket = Basket.getInstance()
+    abstract override val name:String
+    abstract override val price:Int
 
-    override fun display() {
+    var singletonBasket = Basket
+
+    override fun displayInfo() {
         println("========== 끝내주게 맛있는 어묵 메뉴판 ==========")
         println("=            1. 매운 어묵 - 700냥             =")
         println("=            2. 순한 어묵 - 500냥             =")
-        println("=            3. 카레 어묵 - 1000냥            =")
-        println("=            4. 치즈 어묵 - 1000냥            =")
         println("=         0. 다시 본 메뉴판으로 돌아가기         =")
         println("==============================================")
     }

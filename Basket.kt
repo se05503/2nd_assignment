@@ -1,35 +1,41 @@
 package com.example.myAssignment2
 
-// 해당 객체에 대한 생성 없이 바로 접근하기 위해 싱글턴인 object 선언 (class 대신)
-// 해당 클래스는 싱글턴으로 만들어야 할 듯
-class Basket private constructor()  { // 상속 관계 형성
-    var basket = mutableListOf<String>() // 콜렉션 활용
-    var requireMoney:Int=0
+/*
+2. Basket
+-> comapnion object를 사용하여 인스턴스를 만드시는데 이는 Kotlin 방식이 아닙니다.
+-> 단순히 object Basket으로 작성하시고 companion object는 필요 없습니다~!
+*/
 
-    // 근데 companion object 중괄호 안에 안들어가있는 위 변수는 공유변수(?) 에 포함안되나..??
+/*
+4. Basket이 싱글턴이라면 basket이나 requireMoney와 같은 멤버필드를 외부에서 바꾸지 못하게 해주세요.
+setter을 만들어서 해주는 연습을 해주면 좋을 것 같습니다.
+물론 싱글턴이라서 그렇다기보다는 Encapsulation을 위해서 외부에서 내부 변수를 마음대로 수정하면 안되며
+수정이 필요할시 항상 setter로 하는 것이 좋습니다. (private)
 
-    companion object {
-        private var instance : Basket? = null
+예) 예시를 위해 작성한 코드니 참고만 하세요!
+object Basket {
+     // Encapsulation을 위한 private visibility modifier 사용
+    private val basket = mutableListOf<String>() // 콜렉션 활용
+    private var requireMoney: Int = 0
 
-        fun getInstance():Basket {
-            if(instance==null) {
-                synchronized(this) {
-                    instance = Basket()
-                }
-            }
-            return instance!!
-        }
+   // 멤버 변수는 항상 Setter(함수)를 아래와 같이 만들어서 변경한다.
+    fun subtractPrice(price: Int){
+        this.requireMoney -= price
     }
+}
+ */
+
+object Basket { // 상속 관계 형성
+    private val basket = mutableListOf<String>() // 콜렉션 활용
+    private var requireMoney: Int = 0
 
     fun displayBasket() {
-        println("장바구니 : ${basket}")
+        println("장바구니 : ${this.basket}")
     }
 
-
-
-    fun deleteFood(foodName:String?,foodPrice:Int) {
+    fun deleteFood(foodName: String?, foodPrice: Int) {
         basket.remove(foodName)
-        requireMoney-=foodPrice
+        this.requireMoney -= foodPrice
         println("${foodName}이 장바구니에서 삭제되었습니다!")
     }
 }

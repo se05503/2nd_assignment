@@ -1,21 +1,16 @@
 package com.example.myAssignment2
 
-class Topokki : Food() {
+abstract class Topokki : Food {
 
-    val menu1: Int = 2500
-    val menu2: Int = 3500
-    val menu3: Int = 3000
-    val menu4: Int = 500
-    var singletonBasket = Basket.getInstance() // 공유 객체 → 이걸 모든 음식 클래스마다 불러오는게 조금 맘에 안듬 → 상속 관계로 바꿀까?
+    abstract override val name:String
+    abstract override val price:Int
+    var singletonBasket = Basket
 
 
-
-    override fun display() {
+    override fun displayInfo() {
         println("========== 죽여주게 매운 떡볶이 메뉴판 ==========")
         println("=            1. 밀떡 - 2500냥                =")
-        println("=            2. 가래떡 - 3500냥               =")
-        println("=            3. 쌀떡 - 3000냥                 =")
-        println("=            4. 떡볶이토핑 - 500냥              =")
+        println("=            2. 쌀떡 - 3000냥                 =")
         println("=         0. 다시 본 메뉴판으로 돌아가기          =")
         println("==============================================")
     }
