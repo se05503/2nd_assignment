@@ -5,54 +5,32 @@ abstract class Intestine : Food {
     abstract override val name:String
     abstract override val price:Int
 
-    val menu2: Int = 6000
-    val menu3: Int = 5000
-    val menu4: Int = 7000
-    var singletonBasket = Basket.getInstance()
+    val intestines = listOf<Food>(
+        SpicyIntestine("매운 순대",4000),
+        MeatIntestine("고기 순대",6000)
+    )
 
-
-
-    override fun display() {
-        println("========== 맛깔나게 잘익은 순대 메뉴판 ==========")
-        println("=         1. 매운 순대 - 4000냥               =")
-        println("=         2. 고기 순대 - 6000냥               =")
-        println("=         3. 다시 본 메뉴판으로 돌아가기          =")
-        println("==============================================")
+    override fun displayInfo() {
+        println("1. 매운 순대 | 4000냥")
+        println("2. 고기 순대 | 6000냥")
+        println("3. 메뉴판으로 돌아가기")
     }
 
     fun intestineFood(num: Int?) {
         when (num) {
             1 -> {
-                singletonBasket.run {
-                    basket.add("매운 순대")
-                    requireMoney += menu1
+                Basket.run {
+                    basket.add(intestines[0].name)
+                    requireMoney += intestines[0].price
                     displayBasket()
                     Payment.printMoney()
                 }
             }
 
             2 -> {
-                singletonBasket.run {
-                    basket.add("곱창 순대")
-                    requireMoney += menu2
-                    displayBasket()
-                    Payment.printMoney()
-                }
-            }
-
-            3 -> {
-                singletonBasket.run {
-                    basket.add("고기 순대")
-                    requireMoney += menu3
-                    displayBasket()
-                    Payment.printMoney()
-                }
-            }
-
-            4 -> {
-                singletonBasket.run {
-                    basket.add("아바이 순대")
-                    requireMoney += menu4
+                Basket.run {
+                    basket.add(intestines[1].name)
+                    requireMoney += intestines[1].price
                     displayBasket()
                     Payment.printMoney()
                 }

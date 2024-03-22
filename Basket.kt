@@ -26,8 +26,8 @@ object Basket {
  */
 
 object Basket { // 상속 관계 형성
-    private val basket = mutableListOf<String>() // 콜렉션 활용
-    private var requireMoney: Int = 0
+    var basket = mutableListOf<String>() // 콜렉션 활용
+    var requireMoney: Int = 0
 
     fun displayBasket() {
         println("장바구니 : ${this.basket}")
@@ -37,5 +37,6 @@ object Basket { // 상속 관계 형성
         basket.remove(foodName)
         this.requireMoney -= foodPrice
         println("${foodName}이 장바구니에서 삭제되었습니다!")
+        println("장바구니 : ${this.basket}")
     }
 }

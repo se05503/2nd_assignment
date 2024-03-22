@@ -2,54 +2,37 @@ package com.example.myAssignment2
 
 abstract class Fried : Food {
 
-    abstract override val name:String
-    abstract override val price:Int
-    var singletonBasket = Basket
+    abstract override val name: String
+    abstract override val price: Int
+
+    val fries = listOf<Food>(
+        SquidFried("오징어 튀김", 500),
+        ShrimpFried("새우 튀김", 1000)
+    )
 
 
     // 세부 사항에 대한 가격 추가
     override fun displayInfo() {
-
-        println("========== 오질나게 잘튀긴 튀김 메뉴판 ==========")
-        println("=           1. 오징어 튀김 - 500냥            =")
-        println("=            2. 새우 튀김 - 1000냥            =")
-        println("=          0. 다시 본 메뉴판으로 돌아가기        =")
-        println("==============================================")
+        println("1. 오징어 튀김 | 500냥")
+        println("2. 새우 튀김 | 1000냥")
+        println("0. 메뉴판으로 돌아가기")
     }
 
     fun friedFood(num: Int?) {
         when (num) {
             1 -> {
-                singletonBasket.run {
-                    basket.add("오징어 튀김")
-                    requireMoney += menu1
+                Basket.run {
+                    basket.add(fries[0].name)
+                    requireMoney += fries[0].price
                     displayBasket()
                     Payment.printMoney()
                 }
             }
 
             2 -> {
-                singletonBasket.run {
-                    basket.add("가지 튀김")
-                    requireMoney += menu2
-                    displayBasket()
-                    Payment.printMoney()
-                }
-            }
-
-            3 -> {
-                singletonBasket.run {
-                    basket.add("신발 튀김")
-                    requireMoney += menu3
-                    displayBasket()
-                    Payment.printMoney()
-                }
-            }
-
-            4 -> {
-                singletonBasket.run {
-                    basket.add("새우 튀김")
-                    requireMoney += menu4
+                Basket.run {
+                    basket.add(fries[0].name)
+                    requireMoney += fries[1].price
                     displayBasket()
                     Payment.printMoney()
                 }
